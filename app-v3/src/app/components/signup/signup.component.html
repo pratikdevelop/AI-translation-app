@@ -1,0 +1,131 @@
+<div class="max-w-2xl mx-auto p-4">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <!-- Role Selection -->
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" required>
+                <mat-option value="">Select a role</mat-option>
+                <mat-option value="job_seeker">Job Seeker</mat-option>
+                <mat-option value="employer">Employer</mat-option>
+                <mat-option value="admin">Admin</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Personal Information -->
+        <div class="space-y-4 mt-4">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" pattern="^[0-9+()-]*$">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Profile Image</label>
+                <input type="file" accept="image/*" (change)="onFileChange($event, 'profileImage')"
+                    class="w-full p-2 border rounded">
+            </div>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option value="online">Online</mat-option>
+                    <mat-option value="offline">Offline</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" rows="3"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Portfolio URL</mat-label>
+                <input matInput formControlName="portfolioUrl" type="url">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput formControlName="dateOfBirth" type="date">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="location">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Gender</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option value="Male">Male</mat-option>
+                    <mat-option value="Female">Female</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- Job Seeker Fields -->
+        <div *ngIf="signupForm.get('role')?.value === 'job_seeker'" class="space-y-4 mt-4">
+            <div>
+                <label class="block text-sm font-medium mb-1">Resume</label>
+                <input type="file" (change)="onFileChange($event, 'resume')" class="w-full p-2 border rounded">
+            </div>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Skills</mat-label>
+                <input matInput formControlName="skills" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Experience</mat-label>
+                <textarea matInput formControlName="experience" rows="3" required></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Education</mat-label>
+                <textarea matInput formControlName="education" rows="3"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>LinkedIn URL</mat-label>
+                <input matInput formControlName="linkedinUrl" type="url">
+            </mat-form-field>
+        </div>
+
+        <!-- Employer Fields -->
+        <div *ngIf="signupForm.get('role')?.value === 'employer'" class="space-y-4 mt-4">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Company Name</mat-label>
+                <input matInput formControlName="companyName" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Company Website</mat-label>
+                <input matInput formControlName="companyWebsite" type="url" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label>Company Description</mat-label>
+                <textarea matInput formControlName="companyDescription" rows="3"></textarea>
+            </mat-form-field>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-4">
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

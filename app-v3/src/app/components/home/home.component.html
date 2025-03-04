@@ -1,0 +1,262 @@
+
+    <!-- Header -->
+    <header class="bg-white shadow fade-in" style="animation-delay: 0s;">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">AI Jobs</h1>
+            <div>
+                <a routerLink="/auth/login" class="text-blue-500 hover:underline">Login</a>
+                <a routerLink="/auth/signup" class="ml-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gray-100 py-16 fade-in"
+        style="animation-delay: 0.2s; background-image: url('https://via.placeholder.com/1920x1080?text=AI+Background'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQA3QMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAFBgMEAAIHAQj/xAA+EAACAQIEAwUGBAQFBQEBAAABAgMEEQAFEiEGMUETIlFhcRQygZGhsQdCwfAVI1LRM2KS4fEkQ3KiwkQW/8QAGQEAAwEBAQAAAAAAAAAAAAAAAgMEBQEA/8QALhEAAgICAgIABQIFBQAAAAAAAQIAAxEhEjEEQQUTIjJRYeEjQpGx0RRDgaHB/9oADAMBAAIRAxEAPwDo8aaFAxsgWNXYbFuZOPSVjXvbDx8MQgvObAWF9jjMJlgkNZSwVdO7VkMUiR95O0XVpYciPPAqSmnpQWiyladALNJCyydlsdwLDrblgrmWXVlTLReyvpjWZe2BAtoBBPrcC3xwbrKGKoopqeZS0bKdQB3OFGstn9Jn3VLcx5DrqfP7ZNnLZxG1U88UIfX2kkupRvu1x6/XnhnzfIcmyqnfMJ87nhqnbUzK9tTk6jpFr3B5ddhjb8QcxSmkj9vpXjkiXU6d0l9wAWF7eG2/XCHnlPV1MsUtQkiiQiQmSwC3t4ctt+mPUlmwH1M5kJYDoTJquUyNOhmSBiVhLS6WN/zEA+O+L1BSUtZUwGrZ4m0loZXdQJCD4kjcXwAnJlnjKymbTZNbbAi+1/n9MPvCWWO+TiorKZQUMjobmwF7cunrg7iUTIGYfy+hD3DGX18dO8eY2MSG6szAkjfqME6h3dgALEnuAdNsZQ1HaUS2t2f5SfCwxvoa2oHvMPkMdpYMgIm344ArAHUo1UiRwWAuy8geROB6UFXVP2FMqmZ9izEKqjxY9BhiynI58ynM038qnU2BHNreGGWlyqGGGIUbSIiuTJrUanINu9t/b74pSsk7nbLwgwO4L4c4VpsmJcaZqlls07DcX5hR0H1wRqcukmljcTNGiNuinZvXBAIwka/Ntl8xt1v64yoljF0LgHug3sBe+wPr4YrX6dCZj5c5fcCZjw7RZjlooawtKsfuSs15Eb+oNzvjlmf8I1GS1kcFV36ZzaKoC7N6+B8r+mOwR1ReqkQxljEAUbsyim/IBjz+HhvizPAlXS9jUU/aRuLOj738/wDfAOmdx9F7V69TkFHQp2IfQdtlB6eOJkpSA0lt7EKfPxw051w5JRqJaK8lKOg5p6+IwMkisFRPCw+5OImBE1FsDbBgCen7QGO1tt8eU1CpCBlNhvuMGvZdJvzub2xYSmCruB/YYAiFyyYN9l1FUNgo3N8V2pe2rEiXvKDc+v7++GDsAkBkNiWPzxkMUdDSTVci7RRtM4/qCi9vpjgUzvP3Evi/NkyONIIlV6kG9gdlPif34YRP4/XamaTs31tqIYb/ADx7mdZJmcr1U+8khJbyJwPdO8L406aAFkNtpLajLkeamurIYZwFu4IsL6reuHKqAdRH+QG9vG2OaZWrLWRSKbEMLEdMdMhYVNNDMt2DoG9etsKvTYjaGzB1a5Eege8d7ev7+mFesnZaho4wDo7pJ6nDPXfyw8jkDTc28T5YXJoJC3ciLHmxuOZwtY4gz6A0tWy6FNogblvE+GCsFMqoBy04hoUjiiESWAtck87YknrkUbMoA5G+EqBJ2JJwJcjQcz0xIJBvbC/PxDl0B7Fq2LWNrA3N8eDNBUo3s5GlLXB2sL8/rhuCBnEEJvcWfxD4Yp85q5KuQy6lEbLosQ+k2sfLvX/e6tmHC9c00f8AEKqKho11EJ2mrUbWA+vM4eMznzCmhFat3gjc9qh2JH5WB6f74EZ5n2T53RwpHVrHUXbtIpiEYfPY4QUyeUjvoZTnsRSThSF5BAg0jSGZzYW5i5PqOn64M53xHSUtNHlGTOkjABHkjN1jA5i/U7H9cA84iaSmipZcwphSxe6DOtm32vbnbkMCYZaejZUoQKiduTlbRxeYB94/IeuCoR1U895i1rL9CO+R1jmqpKWQAIkZLIux1GxAPnax+OHahoHq2BYFIBuzW3byGOf8IyU9BVR1OZsxhLEM/Mlj1P6nHYIJIpIleJl0W2tyw2qtfXUusJpQIJvGqRqqooVQLADpirkrsizwvIXaOUgljvi2CLG2+KUdos1mUC3aRB7eYNv1xWBoiRN3mFivUfHFdoFsW1FRcm+kEi/qMSxv44kNm3HywPUKUJY5BNDKkgESajK0m5Zbc79N/TEkxullYgk2uMSSWNybgjnvgfm2c5dlFMZ83rKelj5jtnsW9BzOD7g4lpLKCoQqBtv1wl1s+W1eaTx5Y4fs9pCm66uun7G3XCtxT+KVHXq2V8NUtbXdpszITFrHwu1uXLT64Afwjiitox/Eq6l4dy5gbRR9xmHoDdtvPAmoucAR9TCsZJjVm3EGS5O7DMK+FJF27BTrkHqq8vjbC2/GOb51IYOE8jkkBNvaalNQHw90fEn0x7lWQ8PZeNeX5fLm86i4nqzoj9Qg3PLy9cWajM8wknjiM/ZQxzACKnXs1sG8t8VVfDye4qzzgOjPPw1zbNM7mzODN6t52p2TTrt3LlgQAOQ7uOiy0sc1JJBKoKzIY2UjmpBFvkccz/CgLDxXxDSE7hjbz0yMP1x1ZmAiJG55DGZcuH1Lqmys+bMyop8jzKaiqFJaNitmGzjo2InAMK1LwTrTsSgkABXWBcqD42INsdp4x4bpc0p1eSL+Zawe2/rhY4W4epHOY5BXr/Kr4r08h/7cwG3z8f8AL54op8hWwPc5ZQwBb1FbKBHPwxxDJDEQ6rShHY94XlAPpe5w05FNoy5ImO4UIN/36fDFfIsjngyPP6FadzUrLTo0aLqOtZQWHwt8sbzJPlkA1wOsrWSGORSutuXXptcnwxO1vNnH4P8A5GonBeU0rZYamskgRyXiANgNrm43PTyHPnjR4Y1Ol2Keg54ny+kFHGGdu0Zjqke27sf3t8MazRS1L6kbQOew8cDHqCBuP1RxLYdhTgm1jI3j5Y2qHqKil1VMVoHIDi9jp8j03tvjOHMhj1kToy6L3Vx1HMnzwdzmmX+Fz6B3U0vy22YE/bAL9wiSV6EgSOgyynVI6CJIQPdi2Hj3tht54EZlm0Wax1lNw+kNRWtCYmAkHZQ327zDYEf0i5vba2+LicL5DmNRFLWUcbrNGrxxmSTQVIv7mrTzPhirmcT5DUGChpokEcTmCFFsL6bqLDpcDGgfxE14LERkopPa+EoZ37MGSmseilrW+4xyqv4eNYpLoquD3mAvbDvwPn9FmPBuX00lRCZ5e5LGL90FiTb9MeZxlNTl6ECNjDI1ww39AfPETaOoaHeDOUSZGwF1VbAkLbrghl+TFCC1gTbDM0Sgs7DTHHc4qR1cLVCxIkzu7BRZLW+e/wBMcVbLNLHFkTuWYYlBCIto1Fr9ThgymvfJY0SRy9Kx2RdzGDvt4jy89t8CZo2jl7BYirg2KnmfAjy6/LFmGKSaYxSEqVXcEWsPTxwAJSeZVsGJ0CjnjqadZI2DKwuCpuMQVYkTMaGVFUrqZJCeYBXa3xH1wnTZ9QcH0ySZlWiGKViRBYu7na5QDryvyG+++F6t/FHO87Y0/BuRSPfb2idddvh7o+JxdUSwBmZZXg4E63JOkMXayuscYG7O1gPjhKz/APFvhvJy0VLLLmdQNglIAUB83O3yvjnuYZHmVdIs3H3FDLfcUUT9o/oI1Fl+QHngtl+XUOTy0qZNw92RqHjSOvzAdoTrsVI6DY3tf1HPFKeOximsVezPari38QeLdRyiiTJqI7du/dKjx1tuPgMBYuEsqjqHq86zCtz+tv30pQWUkEe9Ix35jkSd+WGeuionEs+bZzJmMSzBYY4XGkqQD7q7D8wI26W5jElMcwqZGpuHMsFPRdoxWfT2Vxa2q562C8gTsL4oTx1GzEm8nQ/eV6KCrhp/+gp6LIaEu8avCFaZ3VWIBY25lbXvz8MQmPKIah3SOavrZGcrJUEvsQQpsblwLodxzB3tbDHScIy1ZEuaVjszbmODb4Ftz9h6YYqDKcvy1NFJTRRW56dz8T1+JJwTXVppf8Ce+XY/3TnTUWaVVeUp8qlR2OsxImmOxJIBHK1y2xPXBmh4CqJD22a1UcVzqMUHea/meQ+F/XD/AAHuEdBjJt16C3LAN5bkYXU6viIDljmcS4Hiak/FriGncW1Cp2v0MqsPpjqhs72X3BsMcvppRSfjlXoD/io6j1MIb9MdPhNodVvTzxkeQDy1NSjqUsyAkLC11Ub/ANsK0jUkWbQmtn9nXXqRyCAzDkurkPj44batNQ0Kbk9fHEFRHFTUrCaBJU0HXG6hg9x1BxOo+qXK4UYMGcUZ3Q0lPUmqoxVTBFfspJR2NQl/fU8tuZ2vthMyquyytqq2qkiTLZRY0kciqYOzIF/VmI35HZbYt59kOXZrAr8PTtDGX78JdtEPj3Dup8uXhgaY8sp1ioqakjhrKJf5taVCpMf6rHl6YdxrIJXs9/tFqgDDJyPX7yw9dlrS2hnS3vsBc2/y3A3t+uN5KgwWHNm3I5WxClSXhAlmaTQCxZwASPE264GzVPaSF3NyfO1sCBHORnInY8szkxBKfN5RpkF4q0W7wudm2GwA3ba3UDBvMo+2yqpihQOzwNos1wbrtY+GEiimefLewWjeoMoCmljbS0jBR7gsLKDzY77bg8xtkGfmPimHhXJiczp4JJJa+rtpjptjZEFyNmtfexPIDpd5FSgch3MOixicHYm2X8X5ZT0dNBJDVNJAlu0XQQpudr3ta/2xW4q44yJ6eKcVK+2xE6TrQ2I8QpN/TbAvib8GpMwzupq8szCmhgncyFJY2vGTzG2x39MZlv4GRrIGr89Z4xzSmpQp/wBTMfthfzVlOMHMX+DqmaJZK/Q0KTzSSxaRYA6uQ9D+mOi1nFs9bl0UEaNHUEASyhudttreOGSh4UyikymLK4qUPSw30s+7XPM6vE4uw5BlsMonio4lkAspty2tiQhixMf8xNZnNpYXnhaNWKG3MeOK9DlsVDMlXK7zyr7iu50A38OfwvhyruFqz2iU0zK0QN1aV+81+Y/3wBzjLpKGpVHmSQhSdMQPdvyuThZyselmdAy3Q1nbVkntMa/zotGlO7YjoLb8r/6RgjNHGHaTUBNKLHpy5D5YAUIIk9osG0n/AJ+QwwPDJJBZAlhy6H0w6r66yPYkt2a7gfRnM/xny51pMrzBSD2btC3XZgCDf1B+eKf/APU5lXUsaQSJSU7qP5VGnZjlvvufrh0/EKhNdwfmEBW8kMXbC3+Tf7Xwm/hhwpLxRl0kntsdPBTy9k/c1udgRYbbWPXGp8MtrXPzJD8Qrc/ZLeUZtFltNCsdHHUVRkdi8otp1BbWINybr16EjrhspeGc6zaKJ84q1p4EtpjRQCLbAbWG3Ic/jhpyXgnI8q0slN7TMP8Au1NnPy5D4DBpxpYjkehGKrfLXP8ACH9ZLV4rf7hgHK+EMroQriLVIP8Au1HvfAch8hguadVS0fLzWwt4Ynj2ubWbwPeOMc2F9r+ZucRM7N9xlaoq6AkLROY7XXSeg7q48MRCDSBYf02AxO8iCxJF2G19zitU1iRRM0rrHH+ZnOOCHN4NVm2xrO1gcc/zf8T8syqWVUkjrHF1SGlu5vfYs5sB6AfE4Rc0/EXiTiCYU9CBRRNzSnXtHA8Sf9hguBzB5ahTNSI/xsoX2HaoAbm17xuuDLZ9HVQrOwZ5dT9wEi1iLA/6r25W+JNLg3g+GnziDMquSeqqo2L9rMxJLWO9v73wP4mByLiGojpqVAurtQpFhcjYjxBP9scYBTkidQh+vUe8gqmmrqmBktHGNUaf0gNp+R3+WLGeFjBJaRlspu4Fyvn88KnB+Y9kZZJE/mTEFjfoNgPvhnqahXU6yNIH2xC+A0uxnvqKFdwtTzUzS5VOkspA0SRzaHXfvB/PnzwNqEyjJKXt6xDPmWnuQvNrBkF7HfkLkb7ctsS5/RRyO8gjQm9ybb4SqqDTN3UtvyAwypwMzllTa3LMdY6w2ZtUr7u37/e+ImnucUyx1HG6KWF7Y5xEMMcYEdnzmqzOZsj4VZZKuVeyrM4EegrFf/Dj6heQ53NvC1um8KZLlnB2TxUCzRxSP3ppWIDTPbf5dBhG4IoYckUOi93kPFm6sfthj4mzMwVkAkJ0IpBBOxPiPDpgLLWtyw6EWtC1stZ7MY8p4synM81qMro60S1MKM2hYXAABsdyLc7DF2PPaAsY1rV1DmNDbfG2F7hF8oOY5n7LRRU9XFKqyTpHYzAgMTc9L6h8MFuyqslrHq6OaoqstmcvUUznW8JPN4zz09SvxHmPHJziLbA0IajnEsaPDLFKre6ym4PyxJ28wveMbctL8/pgVUU6HTXZROkNQ4vtvFUC3J1+zDvD0uDpR50tXNJSSRvT10YvJTyc7f1KfzIfEehsdsd4GDkfiXqiqjjUPLHKGLWA7rfrgbW1GTSy9pVQsX5XMTfpixWKXp3bSe6Q1/Q7/S+BkqAqdYN/LCbWZTH1AEZgqSoyyHNgkk2mhJBDuGUG/QkjocHHhaIMIFkaEWKlQSCLePXAKsy7tUIFmDDkcC6bNc5yqro8vhqFNGZlQCSMFghO6hudtz6emOePfxYg+4V9BtUcTsRgmVHV45xrR1IkW17qdiPkcIH4IzPk/F2d5BMxBZe6D+Zo2IB/0sfpjoEL+0pI0fdZmsPLHNs1kHDf4wZfXqSsFWyazcWIbuE+l7H4Yrq+lysRYeSBp3lTttiCf/E9RiOWsgp4jJPKkaKCWLm1h44ROIvxWyCgJjonbMZxtan93/Vy+WKgDER7DECwBHkvdAwGzzifJ8iiL5nmEUPURA95vgNzjjWacf8AFvEcnYUGuli5dlRpqb4v0+mK+W8C11bKZ8zmZTzchu0f4sdh9cGF/MEsBGbPPxfZ9cWQZey32FRVbX8wo/2+GFSel4q4qk7WvnmeJjcCVuziHovX5HDLR0vDmSs4pYvbayJNZ0fzGANv+41kXYg7HljWq4iqJZHp6RhC70oljjpV1zMbAm0p7vK/ujl1vtghiASTKdNwTl2WxdvnFUmlVuQ38sW62A7zYvSZpQ5VTOMuoUihSLtBNOnZqDew/lr3zuQDt1wMjSerdqgusJemCM5Oqp1Dld29N7FQQRcE4kqMrmgeeRqfsCaVIxmdUwdSTbZlFxyuCdLWsDcY8W/WF8tgMkR04DzUZ1RGU6u2jYgt2XZq4PIqLnbpzxe44yAZllq10SXqKMEttu0XUfDn88IeRZu+XcSe1xx1k7IOwr5ZWEUCW2drHYcr2uN726DHaaYxsivGVeJhcEG4I/3x5xkRa5R8icfy1exddK7jfblg20uoLGzGwG+JeIctXKK9ljAWCU64fJeo+BsMCZ5mhjdn7rFb3xmODnE2ayGHKe5iP5WgC5bCpmtI0SXUHbcm2LeaZrVUxhZZbORshAJHngRNm9Qs8wbaNyGOsdbYNKiNwWtB1BaRs0xH3xcsIlUBSSdzYYmkzBH7KRkRtRtcL98FKRqSRWfcknfblgnBgpx/MdKanbsDUuexgjU3kc7KB4AbnA3OaibMKSGuWRWopR/0xMYVytti25529eV7HbFrJszEGYGKsYexVI0g9Fbx+P6DBLiHKKahyIxUaMsMMutV1XChm3A8hfbHvGUfKs/OIF7keRWPWf7yLg2quWYkmQEhj4gntB9JLfA4doq6RgANvjhBoHShzOGnjDAdgsMluWtVD/8A23yw2UchYbjTt1wAOQDPWLhjCcVPoJeAhL80/Kx/TEWaUdBW0RfMdUBpR2sc4bS8B/qVh8rdb2IN8aVGY0uVUzVFXKqi3djUXkkI6Io3Yk7WGA/tlfxBNFHDTzQVDd+80ZEeXr47j+bN4flU+lyYEQYyZBLUVmSxmvUipvJDISunXpYqGsDsSBe3Q3GIyP5Yve9sS5VRjLqdaOOWR4UHcZmu1/PGs90ZwtyLnnhNwBwY2o4OJQmC3ttt0vv++WA2bQxwQS1bn/AGtTblbfAxKufMuN27ByIKGIo1j7zHp9z8sXOPKhabhqp1MVMoEYA63Nv1wu2gVWBfes/4jKbTZXy9HP8AT8z3JZeyoI5CLa4wzG3M/v8ATCt+JmRVGeUOXVdFGHmikdHGoCyMAQT5Aj64M5C5qciQlrFksQN9+RG3oPnizUVjQskiDUsVri/vDqPv9MVW/RYr+jJ6QWRk9iIOb5PnedxmTNM2lqJiwPZsCIxv4eWJqfhPKcog9ozyqWwt3ZG0KfCyDvH7Y6HWZcjsJacqY5AHDL1U7g/XHO+KaZsjzWomlmSno6yNm7SJGM7PbmDfo1uZUWJGLyPYkSsScGFZc4p8vjngy+iWIwxh1epFlYbbiJTqOx5n5YG1NdUZnG0srtPl09OCJZ7JSxuCBbRbnqA5knflirDCKaOCdokp4fZQsFfWMO01G/dZbHe2ocjsBzxNFBLNPPJDTPXV8CpSTmpIjgkG63UX/wDHa42a9sDiMxIrq0kUDyvVTGhFqaI6KaUHYbjcWG+wG6bEHBjKcrq0hjU+y062t2cd20gkkgXN7XJ6nnikVgqUqaSbMHko46gdlT0oMfsdgxGo232utwDut9Qx7SxcPUyHXXiXVzDzYCw6lnioDsj/ALjXS0skQt7TTML30vBt87n7YI0cNNGv/wCfWRayXS/xvY4W6KoyOOQy0iguN9KzsVPwvbFifOKeR2CRxIAN+ZxIcgzUCgjcJ5vw/lmcyQSZhTzsYDq0xuU9eWx9Rv54P0WbU+X5bUReyR01PRIFpo1mLmRAPMbHp1xz9s7tcSOGQcrk8vS+PY8wlmjYQvCUPMXO1/XBrawMku8NG3G6b+IZ1nlZS1aRjLKJ1MZVRdmKgkaufI7/AAwscY2ZwkRCi9vK3rh/YtQ5RqdR2qxAvY/msL/bHMOIa72kyhpNwdgPdGPOwd9RNK/LrwYo5qFRZZU1bWVfAnrijHUSLT2l3se51xcqoWaEsbyDlq6YGNMisFZTYcgOpw9RFMdyVyyRI3KO+688WYa5YV0xtZb+OKvaLCQ4AcW3DYiNTGxuIfrjpnMx/nKPGwdQUtYC17/vbDdkteM64fahnkBk7PT8iAb+h39CMI1bMCQibryt4nxxeyJ3ojVOQNIp3lub917WHzBtjNDGv6hNCyoWjBhmmgqMwNdU0adrMlR7THGGA1qpsVudhdbj4jBJuKqSKGMxyCMsbKaiNtZI5qkPvuQfJR5404QUx8ie8hXf54YKOhp/4i1U8CNOqBFk07geRx3xzmsRPkjFhlHh+Conzj+N5vlzxsqdnTmolDToDzZgBZbjYKDtc9ScNsTr2kr8yzbknfFUDVte58Di3TQhFBIuw6nD5KZMNzcLYYCcVViZbl09UxAAjOkf5v3bB4AnCF+IEr5lmVDk0HeXVrmsOQ25/vrh1CKWy3Q2f+JNc5A4r22pX4IoZIcv9qlD9vUsZXN7bHkPlgd+KTTjKYoYgWRZBJJvuF5D6kYe6WnEUKqosAOQ6YX8+p0q82WGUhlSE6weRVtmB9QR8RjNLszGw7OzNeusarHQgDgYSJlyxSm5kvJZul8W8wR45VguNVr8tiDt/fEdMoymtCzuI4YF3kksF0nkd9uQxLmmYUdU8XsnayGx1SiIqlj4MQL8hy254cLFu8bOeon5bVeVoaML8L1C1VDNRMby0Z2/zRnl8jfFbjHJnr8nlNMxiqoP5kcqxBnAHvBeoJFxsR0354E5HXJl+cQ1YbuXMc/gUbn8rA/DHTGpu93QGU73HUHFfjW8kwZH5lBrtyPc+eKZ3SnlmpsvM9M7oZavN5LREjlsSBuL9SSCRY8sEcxEEv8AEqGSSrzmaCZJIKdk0LEnukR25izR3sFBABHLd/P4dRS1+YzZnmE01DUyB46bn2djcWJvbqLAdcGDJw5wrHH281FQHSEVppB2jgC3MnU23XfDi0TyiDHwdxFxCI5pWjyimqU1VcOjQXkvuxUbvq2PfYkEnFyf8KqCiVJKWeWonXe0ltz9sdByjOcrztWGWZjTVem1xE4JHqOY+OJ8wBegnjVjExRlDDcqbeGALsISneJxXNsoqFZkaJNY59mAD8QMVqKjzGnpmE+1j3Sxubdfhi1meXZv7S60qzvHewfTa+KoyDPqghJQ+k89QOPHm00FemrYJMoVVUqMVvqc/wBJ2wc4cgl9roZ5TqhaVXJPuABhzPK9+mCeTcEpGNdSvaOOpPLE+eZdHkdOKpzqoWcGZGYAxty1pfmfEY6iqBj3EWeSWbXUJcV8TSIz00Y7jMdZwlZh2UkbArpvYKFP1xd4pISoidJFkhmQMkinZrf84APNqQXJBG98JVMdx7t6kdT2YhRVJAUe9f3sAqhWBLbW6YJTMZpQqjYC4vgbVO4fTbVbn5YcoxJmM87ayrsGbzxMKhbDVEt/IYps1zcDGpffngsQcx5ox20xOm4XZfM+Ppg8IwMtkW1zLKke3W3eP2F8DKHTTw6ivLZQOdseTZpNSRieNwQpLBW5XPw54zHQvoTVDcdmPuURdisAA3Z/uLYZIoNXT645NQ/iBVW/mUEZ0G1w3L4Ww2T/AInZTBLopKSvqB0YRKi/+zX+mCqQpkGS3E2HIj7TU4W18W1jBPdU+uOaD8SoJP8AEjmiH+VN/wD6xcj474ekA9qkrZrjftQSD5W2H0wZf9Ir5LR3qq+mpFk7SVA6C5QNdh6gcsJPCGvNcxzLNZUdjLL2aN0VVPQnn/sMeZrxlktTk81JlVXFTSyLoXtEUKgOxIAPMc8Wsjzrh7L8up6SmzGMrEttek/PYc8H/qCKigGz/aAPG/iixj0NRlcaD5dB4nHPaorWcdZhNIRpoEijsTsLgm/r3rXw1ycTZOi/yantn5hY1JJ+dscnlzOZazMMxpYVaWarOkScgurSt/8A1+WIbEL1so9iX+PpwTHvPGhmoxI8yoyDUCx03XwwC1GS3QHYN4+mAKRST1HtOZ1DVdRcML7InhYYP0TKsV2FwBtbEldRqXBOZfnJyBPPYS0gWEjXKbWtcE46fwzOJcsFLJIZJ6MCJy3Mi3dJ+H2OEbK0VEeukXvDaMW+2LfDua/w/PqdZGulXdJm6Lf3W/1WHocW+NZxbci8yv5inHqN+f1hy7K6mr06+whkl0f1aVJ/THy7mFfVZpWSV1fKZamU3Zz9h4AeGPq3MadaineNlV9SkFX91gQQVPkQbY+ds04JmTMZosmqIJkUkimqZVhqIRfkyt73/kpINsa6ke5jKhxkCAMlzOoyXNKfMaSQpLCwO35hfdT5HH09PIHk1DYOqsw8CVG32xwXJ+HqbKswiqM/qKWYxsDFltPOHkme/d1sO7GgO5JJO3LHQ81/EjKMt/6emL5nXfn9nFog3Xvnp/4g8rbY45UwmRvYjcYF7xCLvzsuFfPeMOH8lJjqKpZp727Gm77X8+g+eEDiDinPeJEenmlSkoz70EFxcf5m5n02wBShhgUWU3O4AHIYUXEYvjE9xnzX8Sa+rZosjoY6SPpPP35D8PdH1wsVAq8xmFRmVTLVTE3DSNe3oOQ+GLUMIWxAG+wGJALSX/KowprD6lKUKJtn0Ps1JTtSsGom73ZdYXtvbyOBDTBrDxG+C8kuoLG63RjZgeWB/EtFHl2Zt7Fc0zqGTrYEYOts6M7ZUT9Qg6aRlJ0tz2Ppim7X2GwxK5DC/XEJHhigSQzUDHl1/pxvjLYKcj20t20je2Kda4kisLMQdvM/vbEMs4RQqt3zz9MeRHWQ3huPIeOIMYM0QYT4Wy+FkqBNGGYOD8x/tg22QxSuTGAg64AUtacsGoIWU7yDqBiZOMzJKtPR0bGR9h2h0g4EgncIMBqMEXDtKANV728cRz5BRhSQ9rdcVkfNZUD19ZHSRnksSgufUnY/LFGtrKaOUwwJNX1R2Idy2n16LiQ2qThMmUBCNtqaVlFQQ3HtKFuiINR+mFvMKyihdkjBkfrbcYJVNJVVDFayURqfeih2A9T1xDT5ZCHXSgCjl12/f2xQmhlop8nSwBNPUE60hCeHiMWctauldNU7iMMDpOwvgzPQBzpVOd/h/wAf3xqKcJKI4umCNgK6ixSwbZhGmctcLuB3ix8fL5YL0kzTkINgTp5jbxwBt2LlQSWKbX6YLUknstKHtZzYKB4/84lZcy0NgRiqKpQoiVwBGLtbx/4+uBBqO1LuTbXv4WXoP1+GB71JdUhLX1jU5H9IxLH/ADZoYdQXt5FW5/KNgP35Y8FnAQBOgZ9xBW0/B9LXBGFWFSR1vfUNrg+o++FbifPqHi3IIUWljMT+7M4u8Ug8D+7jBniLOKXsZKCOzRqojKnba3TCeYKLL8rkp6HSmtg1tRYlrC535Da2LQf1iFQBAMfmKEdFPpKTr2YXZgBtgjR0cMMfaNYknbbbG1S5kj1H3g1m9MRioAGo8gO6uCOTEEgS2TqFgoCX3FrFz5+WIpgNQvu3NjjVJlCGRjb+keGIVlLM1zu2+AxO5lskFLja+w/f75Y0RR05np4X5fTEYbUVUXsP39vviSadIweWoi1sdSt7G4qJx7ErXkx1NH3O29vri+lKa/JoKl4SkSyGFZHIHakC9xv4Yp5bB/EcypaRyQk8yo5H9JO/0vh048pUoXyiKlhSDL0Z49Ma2VGI29L2tfGi3gmpcsdyKn4kDZxUaM5PmVI9FVNG47v5W8RisDfDbnNJ7RHyuU6W3wvHL3HuHnhCNkQ7ayDqVLY904vx5ZPzKi2N3pI4bCWWME8hzwec9RfEgZM2EjM9z+Y74IQEg6hzAJ+QNseYzEbS1ZYkJSNQPzHe+K/Yxw6pUUa13UnoRvjMZgf5YQ+6E6ipqJ8xFEZ3WHsY3OmwJ1AEi/Qb9LYtFUo4xHTIsa8th8cZjMJUAdRrEmUZZGZFB5MSDieBRYn0/X+2PcZjx6hDuasxCyMDuq7fX+2KMkrRbJYWAN+uMxmOeoQ7k0ZMlTGW5kW+uLtaS1QE/LpB+ZtjMZj34nJSpJGd5Ga1y5HwHTFmNi1RqPMHb4f8YzGY6O5wyITu8xJPvE7eGIqqQkny3xmMxXSoPcTeSBKAJZJmJN1Qm3Tlisjl5Gv05AYzGYqtUBRiQqSXMjEjPOVY7eGLcZ1MQbbDGYzEbSlZIrlUdhz0/cXxCO9dm3J3xmMxs/ClGCZlfE2PICFOHXMefZYy8zUL+g/XHVs5jSaCVJlDo2xVhcHGYzFl4+qZf8hM5lxNSplcHa0jOvPuMdQHz3wsw18ssRZkjv6H++MxmM2+teXU1/DtdkOTL2WyNV1AikOlT1Xn9cMtJRQUyFYowLm7Mdyx8zjMZjU+H1pwziYPxa+zkByOJ//Z" alt="AI Jobs Illustration"
+                    class="rounded-lg shadow-lg">
+            </div>
+            <div class="md:w-1/2 md:pl-8 text-center md:text-left">
+                <h2 class="text-4xl font-bold mb-2 text-gray-800">Find Your Dream AI Job</h2>
+                <p class="text-xl mb-6 text-gray-600">Your gateway to thousands of AI career opportunities.</p>
+                <form action="/search" class="flex flex-col sm:flex-row gap-2">
+                    <input type="text" placeholder="Search for AI jobs..."
+                        class="flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select
+                        class="border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Categories</option>
+                        <option value="ml">Machine Learning</option>
+                        <option value="ds">Data Science</option>
+                        <option value="research">AI Research</option>
+                    </select>
+                    <button type="submit"
+                        class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Search</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-12 bg-white fade-in" style="animation-delay: 0.4s;">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800">Why Choose AI Jobs?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div>
+                    <p class="text-4xl font-bold text-blue-500">10,000+</p>
+                    <p class="text-gray-600">AI Jobs Available</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-blue-500">500+</p>
+                    <p class="text-gray-600">Top Companies</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-blue-500">95%</p>
+                    <p class="text-gray-600">Success Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 fade-in" style="animation-delay: 0.6s;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Our Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Thousands of Jobs</h3>
+                    <p class="text-gray-600">Access a vast database of AI job listings from leading tech companies.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Easy Application</h3>
+                    <p class="text-gray-600">Apply to jobs with just a few clicks. No complicated forms.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Personalized Recommendations</h3>
+                    <p class="text-gray-600">Get job suggestions tailored to your skills and experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Companies Hiring Section -->
+    <section class="py-16 bg-gray-100 fade-in" style="animation-delay: 0.8s;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Top Companies Hiring in AI</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <img src="https://via.placeholder.com/150" alt="Company Logo" class="mx-auto h-20 object-contain">
+                <img src="https://via.placeholder.com/150" alt="Company Logo" class="mx-auto h-20 object-contain">
+                <img src="https://via.placeholder.com/150" alt="Company Logo" class="mx-auto h-20 object-contain">
+                <img src="https://via.placeholder.com/150" alt="Company Logo" class="mx-auto h-20 object-contain">
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Categories Section -->
+    <section class="py-16 fade-in" style="animation-delay: 1s;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Explore Job Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Machine Learning</h3>
+                    <p class="text-gray-600">Develop and implement ML algorithms for cutting-edge solutions.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Data Science</h3>
+                    <p class="text-gray-600">Analyze complex data to drive business decisions.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🔬</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">AI Research</h3>
+                    <p class="text-gray-600">Advance the field of AI through innovative research.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Natural Language Processing</h3>
+                    <p class="text-gray-600">Build systems for language understanding and generation.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🤹‍♂️</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Computer Vision</h3>
+                    <p class="text-gray-600">Create technologies to interpret visual data.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <div class="text-4xl mb-4">🎮</div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">AI in Gaming</h3>
+                    <p class="text-gray-600">Design intelligent behaviors for immersive gaming experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Jobs Section -->
+    <section class="py-16 bg-gray-100 fade-in" style="animation-delay: 1.2s;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Featured AI Jobs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Machine Learning Engineer</h3>
+                    <p class="text-gray-600 mb-2">TechCorp - San Francisco, CA</p>
+                    <p class="text-gray-600 mb-2">Full-time • $120k - $150k</p>
+                    <p class="mb-4 text-gray-600">Work on cutting-edge AI projects to develop intelligent systems.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-blue-500 hover:underline">Apply Now</a>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Quick Apply</button>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Data Scientist</h3>
+                    <p class="text-gray-600 mb-2">AI Innovations - New York, NY</p>
+                    <p class="text-gray-600 mb-2">Part-time • $80k - $100k</p>
+                    <p class="mb-4 text-gray-600">Analyze large datasets to drive business insights.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-blue-500 hover:underline">Apply Now</a>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Quick Apply</button>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">AI Research Intern</h3>
+                    <p class="text-gray-600 mb-2">FutureTech - Remote</p>
+                    <p class="text-gray-600 mb-2">Internship • $20/hr</p>
+                    <p class="mb-4 text-gray-600">Contribute to groundbreaking AI research.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-blue-500 hover:underline">Apply Now</a>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Quick Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 fade-in" style="animation-delay: 1.4s;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">What Our Users Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/50" alt="Jane Doe" class="rounded-full mb-4 mx-auto">
+                    <p class="text-lg mb-4 text-gray-600">"I found my dream job as an AI Engineer through AI Jobs. The
+                        process was seamless!"</p>
+                    <p class="font-bold text-gray-800">Jane Doe</p>
+                    <p class="text-gray-600">AI Engineer at TechGiant</p>
+                    <div class="text-yellow-500 text-center">★★★★★</div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/50" alt="John Smith" class="rounded-full mb-4 mx-auto">
+                    <p class="text-lg mb-4 text-gray-600">"The personalized recommendations helped me discover
+                        opportunities I wouldn’t have found otherwise."</p>
+                    <p class="font-bold text-gray-800">John Smith</p>
+                    <p class="text-gray-600">Data Scientist at StartUpX</p>
+                    <div class="text-yellow-500 text-center">★★★★☆</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Teaser Section -->
+    <section class="py-16 bg-gray-100 fade-in" style="animation-delay: 1.6s;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Latest Insights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Top AI Trends in 2025</h3>
+                    <p class="text-gray-600 mb-4">Explore the emerging technologies shaping the future of AI careers.
+                    </p>
+                    <a href="#" class="text-blue-500 hover:underline">Read More</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">How to Ace Your AI Job Interview</h3>
+                    <p class="text-gray-600 mb-4">Tips and tricks to stand out in the competitive AI job market.</p>
+                    <a href="#" class="text-blue-500 hover:underline">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section class="bg-blue-500 text-white py-16 fade-in" style="animation-delay: 1.8s;">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Launch Your AI Career Now</h2>
+            <a href="#" class="bg-white text-blue-500 px-8 py-4 rounded hover:bg-gray-100 text-lg font-semibold">Explore
+                Jobs</a>
+            <a href="#" class="ml-4 text-white underline">See All Jobs</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 fade-in" style="animation-delay: 2s;">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Company</h3>
+                    <ul>
+                        <li><a href="#" class="hover:underline">About Us</a></li>
+                        <li><a href="#" class="hover:underline">Blog</a></li>
+                        <li><a href="#" class="hover:underline">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Support</h3>
+                    <ul>
+                        <li><a href="#" class="hover:underline">Contact Us</a></li>
+                        <li><a href="#" class="hover:underline">FAQ</a></li>
+                        <li><a href="#" class="hover:underline">Help Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Legal</h3>
+                    <ul>
+                        <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:underline">Terms of Service</a></li>
+                        <li><a href="#" class="hover:underline">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <p>© 2025 AI Jobs. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
