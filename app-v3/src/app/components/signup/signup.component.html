@@ -1,131 +1,346 @@
+<!-- signup.component.html -->
 <div class="max-w-2xl mx-auto p-4">
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <!-- Role Selection -->
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="role" required>
-                <mat-option value="">Select a role</mat-option>
-                <mat-option value="job_seeker">Job Seeker</mat-option>
-                <mat-option value="employer">Employer</mat-option>
-                <mat-option value="admin">Admin</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <mat-stepper orientation="horizontal" [linear]="true" #stepper>
+        <!-- Step 1: Role Selection -->
+        <mat-step [stepControl]="signupForm">
+            <ng-template matStepLabel>Select Role</ng-template>
+            <form [formGroup]="signupForm">
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role" required>
+                        <mat-option value="">Select a role</mat-option>
+                        <mat-option value="job_seeker">Job Seeker</mat-option>
+                        <mat-option value="employer">Employer</mat-option>
+                        <mat-option value="admin">Admin</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="signupForm.get('role')?.hasError('required')">Role is required</mat-error>
+                </mat-form-field>
+                <div class="mt-4">
+                    <button mat-flat-button color="primary" class="w-full" (click)="nextStep()" matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
 
-        <!-- Personal Information -->
-        <div class="space-y-4 mt-4">
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" type="email" required>
-            </mat-form-field>
+        <!-- Step 2: Personal Information -->
+        <mat-step [stepControl]="personalInfoGroup">
+            <ng-template matStepLabel>Personal Information</ng-template>
+            <form [formGroup]="signupForm">
+                <div class="space-y-4">
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" type="email" required>
+                        <mat-error *ngIf="signupForm.get('email')?.hasError('required')">Email is required</mat-error>
+                        <mat-error *ngIf="signupForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Name</mat-label>
-                <input matInput formControlName="name" required>
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" required>
+                        <mat-error *ngIf="signupForm.get('name')?.hasError('required')">Name is required</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Phone</mat-label>
-                <input matInput formControlName="phone" pattern="^[0-9+()-]*$">
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone" pattern="^[0-9+()-]*$">
+                        <mat-error *ngIf="signupForm.get('phone')?.hasError('pattern')">Invalid phone number</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Username</mat-label>
-                <input matInput formControlName="username">
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Username</mat-label>
+                        <input matInput formControlName="username">
+                    </mat-form-field>
 
-            <div>
-                <label class="block text-sm font-medium mb-1">Profile Image</label>
-                <input type="file" accept="image/*" (change)="onFileChange($event, 'profileImage')"
-                    class="w-full p-2 border rounded">
-            </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Profile Image</label>
+                        <input type="file" accept="image/*" (change)="onFileChange($event, 'profileImage')"
+                            class="w-full p-2 border rounded">
+                    </div>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Status</mat-label>
-                <mat-select formControlName="status">
-                    <mat-option value="online">Online</mat-option>
-                    <mat-option value="offline">Offline</mat-option>
-                </mat-select>
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="status">
+                            <mat-option value="online">Online</mat-option>
+                            <mat-option value="offline">Offline</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Description</mat-label>
-                <textarea matInput formControlName="description" rows="3"></textarea>
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description" rows="3"></textarea>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Portfolio URL</mat-label>
-                <input matInput formControlName="portfolioUrl" type="url">
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Date of Birth</mat-label>
+                        <input matInput formControlName="dateOfBirth" type="date">
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Date of Birth</mat-label>
-                <input matInput formControlName="dateOfBirth" type="date">
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Location</mat-label>
+                        <input matInput formControlName="location">
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Location</mat-label>
-                <input matInput formControlName="location">
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender">
+                            <mat-option value="M">Male</mat-option>
+                            <mat-option value="F">Female</mat-option>
+                            <mat-option value="O">Other</mat-option>
+                            <mat-option value="P">Prefer not to say</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="mt-4 flex justify-between">
+                    <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-flat-button color="primary" matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Gender</mat-label>
-                <mat-select formControlName="gender">
-                    <mat-option value="Male">Male</mat-option>
-                    <mat-option value="Female">Female</mat-option>
-                    <mat-option value="Other">Other</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+        <!-- Step 3: Role-Specific Information -->
+        <mat-step [stepControl]="roleSpecificGroup">
+            <ng-template matStepLabel>Role-Specific Details</ng-template>
+            <form [formGroup]="signupForm">
+                <!-- Job Seeker Fields -->
+                <div *ngIf="signupForm.get('role')?.value === 'job_seeker'" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Resume</label>
+                        <input type="file" (change)="onFileChange($event, 'resume')" class="w-full p-2 border rounded">
+                    </div>
 
-        <!-- Job Seeker Fields -->
-        <div *ngIf="signupForm.get('role')?.value === 'job_seeker'" class="space-y-4 mt-4">
-            <div>
-                <label class="block text-sm font-medium mb-1">Resume</label>
-                <input type="file" (change)="onFileChange($event, 'resume')" class="w-full p-2 border rounded">
-            </div>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>LinkedIn URL</mat-label>
+                        <input matInput formControlName="linkedinUrl" type="url">
+                        <mat-error *ngIf="signupForm.get('linkedinUrl')?.hasError('pattern')">Invalid URL</mat-error>
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Skills</mat-label>
-                <input matInput formControlName="skills" required>
-            </mat-form-field>
+                <!-- Employer Fields -->
+                <div *ngIf="signupForm.get('role')?.value === 'employer'" class="space-y-4">
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Company Name</mat-label>
+                        <input matInput formControlName="companyName" required>
+                        <mat-error *ngIf="signupForm.get('companyName')?.hasError('required')">Company name is
+                            required</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Experience</mat-label>
-                <textarea matInput formControlName="experience" rows="3" required></textarea>
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Company Website</mat-label>
+                        <input matInput formControlName="companyWebsite" type="url" required>
+                        <mat-error *ngIf="signupForm.get('companyWebsite')?.hasError('required')">Website is
+                            required</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Education</mat-label>
-                <textarea matInput formControlName="education" rows="3"></textarea>
-            </mat-form-field>
+                    <mat-form-field appearance="fill" class="w-full">
+                        <mat-label>Company Description</mat-label>
+                        <textarea matInput formControlName="companyDescription" rows="3"></textarea>
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>LinkedIn URL</mat-label>
-                <input matInput formControlName="linkedinUrl" type="url">
-            </mat-form-field>
-        </div>
+                <div class="mt-4 flex justify-between">
+                    <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-flat-button color="primary" matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
 
-        <!-- Employer Fields -->
-        <div *ngIf="signupForm.get('role')?.value === 'employer'" class="space-y-4 mt-4">
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Company Name</mat-label>
-                <input matInput formControlName="companyName" required>
-            </mat-form-field>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Company Website</mat-label>
-                <input matInput formControlName="companyWebsite" type="url" required>
-            </mat-form-field>
+        <!-- add Skill and languages step combine -->
+                <mat-step [stepControl]="skillAndLanguageGroup">
+                    <ng-template matStepLabel>Skills and Languages</ng-template>
+                    <form [formGroup]="skillAndLanguageGroup">
+                        <div class="space-y-6">
+                            <!-- Skills with Chips and Autocomplete -->
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Skills</mat-label>
+                                <mat-chip-list #skillChipList aria-label="Skill selection">
+                                    <mat-chip *ngFor="let skill of skillAndLanguageGroup.get('skills')?.value" [removable]="true"
+                                        (removed)="removeSkill(skill)">
+                                        {{skill}}
+                                        <mat-icon matChipRemove>cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="Add a skill..." #skillInput formControlName="skillCtrl"
+                                        [matAutocomplete]="autoSkill" [matChipInputFor]="skillChipList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addSkill($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #autoSkill="matAutocomplete" (optionSelected)="selectedSkill($event)">
+                                    <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+                                        {{skill}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                
+                            <!-- Languages with Chips and Autocomplete -->
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Languages</mat-label>
+                                <mat-chip-list #languageChipList aria-label="Language selection">
+                                    <mat-chip *ngFor="let language of skillAndLanguageGroup.get('languages')?.value" [removable]="true"
+                                        (removed)="removeLanguage(language)">
+                                        {{language}}
+                                        <mat-icon matChipRemove>cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="Add a language..." #languageInput formControlName="languageCtrl"
+                                        [matAutocomplete]="autoLanguage" [matChipInputFor]="languageChipList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="addLanguage($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #autoLanguage="matAutocomplete" (optionSelected)="selectedLanguage($event)">
+                                    <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
+                                        {{language}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
 
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label>Company Description</mat-label>
-                <textarea matInput formControlName="companyDescription" rows="3"></textarea>
-            </mat-form-field>
-        </div>
+        <!-- Step 4: Additional Details (Experience, Education, Portfolio, Address) -->
+        <mat-step>
+            <ng-template matStepLabel>Additional Details</ng-template>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <!-- Experience (Multiple Entries) -->
+                <div *ngIf="signupForm.get('role')?.value === 'job_seeker'" class="space-y-4">
+                    <h3>Experience</h3>
+                    <div formArrayName="experiences" *ngFor="let exp of experiences.controls; let i=index"
+                        class="space-y-2 border p-2">
+                        <div [formGroupName]="i">
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Title</mat-label>
+                                <input matInput formControlName="title" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Company</mat-label>
+                                <input matInput formControlName="company" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Location</mat-label>
+                                <input matInput formControlName="location">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Start Date</mat-label>
+                                <input matInput formControlName="startDate" type="date" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>End Date</mat-label>
+                                <input matInput formControlName="endDate" type="date">
+                            </mat-form-field>
+                            <mat-checkbox formControlName="isCurrent">Current Job</mat-checkbox>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput formControlName="description" rows="2"></textarea>
+                            </mat-form-field>
+                            <button mat-button color="warn" (click)="removeExperience(i)">Remove</button>
+                        </div>
+                    </div>
+                    <button mat-flat-button color="accent" (click)="addExperience()">Add Experience</button>
+                </div>
 
-        <!-- Submit Button -->
-        <div class="mt-4">
-            <button mat-raised-button color="primary" type="submit">Submit</button>
-        </div>
-    </form>
+                <!-- Education (Multiple Entries) -->
+                <div *ngIf="signupForm.get('role')?.value === 'job_seeker'" class="space-y-4 mt-4">
+                    <h3>Education</h3>
+                    <div formArrayName="educations" *ngFor="let edu of educations.controls; let i=index"
+                        class="space-y-2 border p-2">
+                        <div [formGroupName]="i">
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Degree</mat-label>
+                                <input matInput formControlName="degree" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Institution</mat-label>
+                                <input matInput formControlName="institution" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Location</mat-label>
+                                <input matInput formControlName="location">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Start Date</mat-label>
+                                <input matInput formControlName="startDate" type="date" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>End Date</mat-label>
+                                <input matInput formControlName="endDate" type="date">
+                            </mat-form-field>
+                            <mat-checkbox formControlName="isCurrent">Ongoing</mat-checkbox>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput formControlName="description" rows="2"></textarea>
+                            </mat-form-field>
+                            <button mat-button color="warn" (click)="removeEducation(i)">Remove</button>
+                        </div>
+                    </div>
+                    <button mat-flat-button color="accent" (click)="addEducation()">Add Education</button>
+                </div>
+
+                <!-- Portfolio (Multiple Entries) -->
+                <div *ngIf="signupForm.get('role')?.value === 'job_seeker'" class="space-y-4 mt-4">
+                    <h3>Portfolios</h3>
+                    <div formArrayName="portfolios" *ngFor="let port of portfolios.controls; let i=index"
+                        class="space-y-2 border p-2">
+                        <div [formGroupName]="i">
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>URL</mat-label>
+                                <input matInput formControlName="url" type="url" required>
+                            </mat-form-field>
+                            <button mat-button color="warn" (click)="removePortfolio(i)">Remove</button>
+                        </div>
+                    </div>
+                    <button mat-flat-button color="accent" (click)="addPortfolio()">Add Portfolio</button>
+                </div>
+
+                <!-- Address (Multiple Entries) -->
+                <div class="space-y-4 mt-4">
+                    <h3>Addresses</h3>
+                    <div formArrayName="addresses" *ngFor="let addr of addresses.controls; let i=index"
+                        class="space-y-2 border p-2">
+                        <div [formGroupName]="i">
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Street</mat-label>
+                                <input matInput formControlName="street" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>City</mat-label>
+                                <input matInput formControlName="city" required>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>State</mat-label>
+                                <input matInput formControlName="state">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Zip Code</mat-label>
+                                <input matInput formControlName="zipCode">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Country</mat-label>
+                                <input matInput formControlName="country">
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Address Type</mat-label>
+                                <mat-select formControlName="addressType" required>
+                                    <mat-option value="home">Home</mat-option>
+                                    <mat-option value="work">Work</mat-option>
+                                    <mat-option value="other">Other</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-checkbox formControlName="isPrimary">Primary Address</mat-checkbox>
+                            <button mat-button color="warn" (click)="removeAddress(i)">Remove</button>
+                        </div>
+                    </div>
+                    <button mat-flat-button color="accent" (click)="addAddress()">Add Address</button>
+                </div>
+
+                <div class="mt-4 flex justify-between">
+                    <button mat-flat-button color="accent" matStepperPrevious>Back</button>
+                    <button mat-flat-button color="primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-stepper>
 </div>

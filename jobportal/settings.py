@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",  # For token auth
     "corsheaders",
     'users',
+    'profiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

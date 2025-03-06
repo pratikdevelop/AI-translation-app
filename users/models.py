@@ -1,3 +1,4 @@
+# users/models.py
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.core.validators import RegexValidator, URLValidator
@@ -9,7 +10,7 @@ class MyUserManager(BaseUserManager):
         
         email = self.normalize_email(email)
         user = self.model(email=email, name=name, **extra_fields)
-        user.set_password(password)  # set_password handles None case
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
@@ -51,24 +52,14 @@ class User(AbstractBaseUser):
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='offline')
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='job_seeker')
-
-    description = models.TextField(max_length=2000, blank=True)  # Added max_length
-    portfolio_url = models.URLField(validators=[URLValidator()], blank=True)
+    description = models.TextField(max_length=2000, blank=True)
 
     date_of_birth = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=255, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='P')
 
-
-    city = models.TextField(max_length=255,null=True,  blank=True, default=None)
-    state = models.TextField(max_length=255,null=True,  blank=True, default=None)
-    country = models.TextField(max_length=255,null=True,  blank=True, default=None)
-    zipcode = models.CharField(max_length=20, null=True, blank=True, default=None)
-
     # Job seeker fields
     resume = models.FileField(upload_to='resumes/', null=True, blank=True)
-    experience = models.TextField(max_length=5000, blank=True)  # Added max_length
-    education = models.TextField(max_length=2000, blank=True)  # Added max_length
     linkedin_url = models.URLField(validators=[URLValidator()], blank=True)
     
     # Employer fields
