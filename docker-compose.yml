@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  translator:
+    build: .
+    volumes:
+      - ./model:/model
+    tty: true  # Keeps the container running for interactive input
+    command: python main.py
+
+  trainer:
+    build: .
+    volumes:
+      - ./model:/model
+    command: python train.py
