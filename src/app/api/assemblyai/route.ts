@@ -3,8 +3,12 @@ import {NextRequest, NextResponse} from 'next/server';
 import {AssemblyAI} from 'assemblyai';
 
 export async function GET(req: NextRequest) {
+  if (!process.env.ASSEMBLYAI_API_KEY) {
+    return NextResponse.json({ error: 'AssemblyAI API key not configured' }, { status: 500 });
+  }
+
   const client = new AssemblyAI({
-    apiKey: process.env.ASSEMBLYAI_API_KEY!,
+    apiKey: process.env.ASSEMBLYAI_API_KEY,
   });
 
   try {

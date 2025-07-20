@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { RealtimeTranscript, AssemblyAI } from 'assemblyai';
+import { useToast } from '@/hooks/use-toast';
 
 interface CommandCenterProps {
   isRecording: boolean;
@@ -18,6 +19,7 @@ export function CommandCenter({ isRecording, setIsRecording, setTranscript, sugg
   const [currentUtterance, setCurrentUtterance] = useState('');
   const recorderRef = useRef<AssemblyAI.RealtimeTranscriber | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const { toast } = useToast();
 
   const startRecording = async () => {
     if (recorderRef.current) {
@@ -29,8 +31,15 @@ export function CommandCenter({ isRecording, setIsRecording, setTranscript, sugg
       const response = await fetch('/api/assemblyai');
       const data = await response.json();
 
-      if (!data.token) {
-        throw new Error('Failed to get AssemblyAI token');
+      if (data.error || !data.token) {
+        const errorMessage = data.error || 'Failed to get AssemblyAI token';
+        console.error(errorMessage);
+        toast({
+            variant: "destructive",
+            title: "Transcription Error",
+            description: "Could not connect to the transcription service. Please ensure your API key is set correctly in the .env file.",
+        });
+        throw new Error(errorMessage);
       }
 
       const recorder = new AssemblyAI.RealtimeTranscriber({
@@ -60,16 +69,31 @@ export function CommandCenter({ isRecording, setIsRecording, setTranscript, sugg
       
       recorder.on('close', (code: number, reason: string) => {
         console.log('Connection closed:', code, reason);
-        recorderRef.current = null;
+        if (recorderRef.current) {
+            recorderRef.current = null;
+        }
         setIsRecording(false);
       });
 
       await recorder.connect();
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      audioContextRef.current = new AudioContext();
+      if(!audioContextRef.current || audioContextRef.current.state === 'closed') {
+        audioContextRef.current = new AudioContext();
+      }
       const source = audioContextRef.current.createMediaStreamSource(stream);
-      recorder.stream(source);
+      
+      const audioProcessor = audioContextRef.current.createScriptProcessor(1024, 1, 1);
+      
+      audioProcessor.onaudioprocess = (event) => {
+          if (recorderRef.current && recorderRef.current.isOpen) {
+              const inputData = event.inputBuffer.getChannelData(0);
+              recorderRef.current.send(inputData);
+          }
+      };
+      
+      source.connect(audioProcessor);
+      audioProcessor.connect(audioContextRef.current.destination);
       
       recorderRef.current = recorder;
       setIsRecording(true);
@@ -77,16 +101,24 @@ export function CommandCenter({ isRecording, setIsRecording, setTranscript, sugg
     } catch (error) {
       console.error('Error starting recording:', error);
       setIsRecording(false);
+      if (error instanceof Error && error.message.includes('permission')) {
+        toast({
+            variant: "destructive",
+            title: "Microphone Access Denied",
+            description: "Please allow microphone access in your browser to start recording.",
+        });
+      }
     }
   };
 
   const stopRecording = async () => {
     if (recorderRef.current) {
       await recorderRef.current.close();
-      recorderRef.current = null;
+      // No need to nullify here, 'close' event handler does it.
     }
     if(audioContextRef.current && audioContextRef.current.state !== 'closed') {
         await audioContextRef.current.close();
+        audioContextRef.current = null;
     }
     setIsRecording(false);
     setCurrentUtterance('');
@@ -106,7 +138,7 @@ export function CommandCenter({ isRecording, setIsRecording, setTranscript, sugg
             stopRecording();
         }
     }
-  }, []);
+  }, [isRecording]);
 
   return (
     <Card className="flex-1 flex flex-col">
