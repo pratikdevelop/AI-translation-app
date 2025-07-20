@@ -1,22 +1,11 @@
 "use client";
 
-import React, { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
+import React, { type Dispatch, type SetStateAction, useEffect, useState, useRef } from 'react';
 import { Mic, Square } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '../ui/badge';
-
-const samplePhrases = [
-  "Schedule a meeting with the marketing team for tomorrow at 2 PM.",
-  "What are the legal implications of the new data privacy law?",
-  "Initiate the patient onboarding sequence.",
-  "Run diagnostics on the primary server.",
-  "What's the current status of ticket number 742?",
-  "Add a new lead John Doe from Acme Corp to the CRM.",
-  "Summarize the key points of the last customer support call.",
-  "Book a follow-up appointment for this patient in two weeks.",
-  "Generate a sales report for the last quarter.",
-];
+import { RealtimeTranscript, AssemblyAI } from 'assemblyai';
 
 interface CommandCenterProps {
   isRecording: boolean;
@@ -27,25 +16,97 @@ interface CommandCenterProps {
 
 export function CommandCenter({ isRecording, setIsRecording, setTranscript, suggestions }: CommandCenterProps) {
   const [currentUtterance, setCurrentUtterance] = useState('');
+  const recorderRef = useRef<AssemblyAI.RealtimeTranscriber | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isRecording) {
-      interval = setInterval(() => {
-        const randomPhrase = samplePhrases[Math.floor(Math.random() * samplePhrases.length)];
-        setCurrentUtterance(randomPhrase);
-        setTranscript(prev => prev ? `${prev}\n\n- ${randomPhrase}` : `- ${randomPhrase}`);
-      }, 3000);
+  const startRecording = async () => {
+    if (recorderRef.current) {
+      console.error("Recording is already in progress.");
+      return;
     }
-    return () => {
-      clearInterval(interval);
-      setCurrentUtterance('');
-    };
-  }, [isRecording, setTranscript]);
+
+    try {
+      const response = await fetch('/api/assemblyai');
+      const data = await response.json();
+
+      if (!data.token) {
+        throw new Error('Failed to get AssemblyAI token');
+      }
+
+      const recorder = new AssemblyAI.RealtimeTranscriber({
+        token: data.token,
+        sampleRate: 16000,
+      });
+
+      recorder.on('open', () => {
+        console.log('Connection opened');
+      });
+
+      recorder.on('transcript', (transcript: RealtimeTranscript) => {
+        if (transcript.text) {
+          if (transcript.message_type === 'PartialTranscript') {
+            setCurrentUtterance(transcript.text);
+          } else if (transcript.message_type === 'FinalTranscript') {
+            setTranscript(prev => prev ? `${prev}\n\n- ${transcript.text}` : `- ${transcript.text}`);
+            setCurrentUtterance('');
+          }
+        }
+      });
+
+      recorder.on('error', (error) => {
+        console.error('Real-time transcription error:', error);
+        stopRecording();
+      });
+      
+      recorder.on('close', (code: number, reason: string) => {
+        console.log('Connection closed:', code, reason);
+        recorderRef.current = null;
+        setIsRecording(false);
+      });
+
+      await recorder.connect();
+
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioContextRef.current = new AudioContext();
+      const source = audioContextRef.current.createMediaStreamSource(stream);
+      recorder.stream(source);
+      
+      recorderRef.current = recorder;
+      setIsRecording(true);
+
+    } catch (error) {
+      console.error('Error starting recording:', error);
+      setIsRecording(false);
+    }
+  };
+
+  const stopRecording = async () => {
+    if (recorderRef.current) {
+      await recorderRef.current.close();
+      recorderRef.current = null;
+    }
+    if(audioContextRef.current && audioContextRef.current.state !== 'closed') {
+        await audioContextRef.current.close();
+    }
+    setIsRecording(false);
+    setCurrentUtterance('');
+  };
 
   const toggleRecording = () => {
-    setIsRecording(prev => !prev);
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
   };
+
+  useEffect(() => {
+    return () => {
+        if (isRecording) {
+            stopRecording();
+        }
+    }
+  }, []);
 
   return (
     <Card className="flex-1 flex flex-col">
