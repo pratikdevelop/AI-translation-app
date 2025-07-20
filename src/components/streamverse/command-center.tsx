@@ -4,7 +4,7 @@ import React, { type Dispatch, type SetStateAction, useEffect, useState, useRef 
 import { Mic, Square } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '../ui/badge';
+import { Badge } from '@/components/ui/badge';
 import { RealtimeTranscript, AssemblyAI } from 'assemblyai';
 
 interface CommandCenterProps {
