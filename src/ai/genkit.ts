@@ -1,16 +1,14 @@
-import {genkit, configureGenkit} from 'genkit';
+import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
 import {googleCloud} from '@genkit-ai/google-cloud';
 
-configureGenkit({
+export const ai = genkit({
   plugins: [
     googleAI(),
-    googleCloud, // Pass the plugin object directly
+    googleCloud,
   ],
   // Log developer-level details to the console.
   logLevel: 'debug',
   // Perform OpenTelemetry instrumentation and enable trace collection.
   enableTracing: true,
 });
-
-export const ai = genkit();
