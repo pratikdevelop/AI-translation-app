@@ -37,9 +37,10 @@ export function CommandCenter({ isRecording, setIsRecording, setTranscript, sugg
         toast({
             variant: "destructive",
             title: "Transcription Error",
-            description: "Could not connect to the transcription service. Please ensure your API key is set correctly in the .env file.",
+            description: errorMessage,
         });
-        throw new Error(errorMessage);
+        setIsRecording(false);
+        return;
       }
 
       const recorder = new AssemblyAI.RealtimeTranscriber({

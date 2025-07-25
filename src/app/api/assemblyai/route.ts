@@ -3,19 +3,22 @@ import {NextRequest, NextResponse} from 'next/server';
 import {AssemblyAI} from 'assemblyai';
 
 export async function GET(req: NextRequest) {
-  if (!process.env.ASSEMBLYAI_API_KEY) {
-    return NextResponse.json({ error: 'AssemblyAI API key not configured' }, { status: 500 });
+  const apiKey = process.env.ASSEMBLYAI_API_KEY;
+
+  if (!apiKey) {
+    return NextResponse.json({ error: 'AssemblyAI API key not configured on the server.' }, { status: 500 });
   }
 
   const client = new AssemblyAI({
-    apiKey: process.env.ASSEMBLYAI_API_KEY,
+    apiKey: apiKey,
   });
 
   try {
     const token = await client.realtime.createTemporaryToken({expires_in: 3600});
     return NextResponse.json({token});
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error getting AssemblyAI token:', error);
-    return NextResponse.json({error: 'Failed to get AssemblyAI token'}, {status: 500});
+    const errorMessage = error.message || 'Failed to get AssemblyAI token';
+    return NextResponse.json({error: `AssemblyAI API Error: ${errorMessage}`}, {status: 500});
   }
 }
