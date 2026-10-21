@@ -1,7 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { AuthButtons } from "@/components/AuthButtons";
+import { DocTranslator } from "@/components/DocTranslator";
+import { LANGUAGES } from "@/lib/languages";
 import {
   Sparkles,
   ArrowRightLeft,
@@ -10,23 +14,21 @@ import {
   Languages,
   Wand2,
   AlertCircle,
+  Clock,
+  Trash2,
 } from "lucide-react";
 
-const LANGUAGES = [
-  "Spanish",
-  "French",
-  "German",
-  "Japanese",
-  "Hindi",
-  "Mandarin Chinese",
-  "Italian",
-  "Portuguese",
-  "Russian",
-];
+type HistoryItem = {
+  id: string; ts: number; text: string; targetLanguage: string;
+  tone: string; detectedLanguage: string; translation: string;
+};
 
 export default function Home() {
   const [text, setText] = useState("");
   const [targetLanguage, setTargetLanguage] = useState("Spanish");
+  const { isSignedIn } = useUser();
+  const [remaining, setRemaining] = useState<number | null>(null);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{
@@ -35,6 +37,23 @@ export default function Home() {
     translation?: string;
     error?: string;
   } | null>(null);
+
+  const loadHistory = useCallback(async () => {
+    try {
+      const res = await fetch("/api/history");
+      if (res.ok) setHistory((await res.json()).items ?? []);
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    if (isSignedIn) loadHistory();
+    else setHistory([]);
+  }, [isSignedIn, loadHistory]);
+
+  const clearHistory = async () => {
+    await fetch("/api/history", { method: "DELETE" });
+    setHistory([]);
+  };
 
   const handleTranslate = async () => {
     if (!text.trim()) return;
@@ -52,6 +71,8 @@ export default function Home() {
       const data = await res.json();
       if (res.ok) {
         setResult(data);
+        if (typeof data.remaining === "number") setRemaining(data.remaining);
+        if (isSignedIn) loadHistory();
       } else {
         setResult({ error: data.error || "Failed to translate" });
       }
@@ -85,7 +106,10 @@ export default function Home() {
             </div>
           </div>
 
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <AuthButtons />
+          </div>
         </div>
       </header>
 
@@ -99,6 +123,9 @@ export default function Home() {
               <Sparkles className="w-4 h-4" />
               {result?.detectedLanguage ? `Detected: ${result.detectedLanguage}` : "Auto-Detect Language"}
             </span>
+            {remaining !== null && (
+              <span className="text-xs text-gray-500 dark:text-gray-400">{remaining.toLocaleString()} characters left today</span>
+            )}
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -197,6 +224,45 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        <DocTranslator targetLanguage={targetLanguage} />
+
+        {/* History (signed-in users) */}
+        {isSignedIn && (
+          <section className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm">
+            <div className="flex items-center justify-between pb-2 border-b border-gray-100 dark:border-gray-800 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+              <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> Recent translations</span>
+              {history.length > 0 && (
+                <button onClick={clearHistory} className="flex items-center gap-1 hover:text-red-500 transition normal-case tracking-normal">
+                  <Trash2 className="w-3.5 h-3.5" /> Clear
+                </button>
+              )}
+            </div>
+            {history.length === 0 ? (
+              <p className="mt-3 text-sm text-gray-400 dark:text-gray-600 italic">Your translations will be saved here for 90 days.</p>
+            ) : (
+              <ul className="mt-2 divide-y divide-gray-100 dark:divide-gray-800 max-h-72 overflow-y-auto">
+                {history.map((h) => (
+                  <li key={h.id}>
+                    <button
+                      onClick={() => {
+                        setText(h.text);
+                        setTargetLanguage(h.targetLanguage);
+                        setResult({ detectedLanguage: h.detectedLanguage, translation: h.translation });
+                      }}
+                      className="w-full text-left py-2.5 px-1 hover:bg-gray-50 dark:hover:bg-gray-800/60 rounded-lg transition"
+                    >
+                      <p className="text-sm text-gray-800 dark:text-gray-100 truncate">{h.text}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                        {h.detectedLanguage} → {h.targetLanguage} · {new Date(h.ts).toLocaleString()}
+                      </p>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        )}
       </main>
     </div>
   );
