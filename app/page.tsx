@@ -2,8 +2,6 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { ThemeToggle } from "@/components/ThemeToggle";
-import { AuthButtons } from "@/components/AuthButtons";
 import { DocTranslator } from "@/components/DocTranslator";
 import { LANGUAGES } from "@/lib/languages";
 import {
@@ -11,7 +9,6 @@ import {
   ArrowRightLeft,
   Copy,
   Check,
-  Languages,
   Wand2,
   AlertCircle,
   Clock,
@@ -28,6 +25,7 @@ export default function Home() {
   const [targetLanguage, setTargetLanguage] = useState("Spanish");
   const { isSignedIn } = useUser();
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [fixGrammar, setFixGrammar] = useState(true);
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,7 +63,7 @@ export default function Home() {
       const res = await fetch("/api/translate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, targetLanguage }),
+        body: JSON.stringify({ text, targetLanguage, fixGrammar }),
       });
 
       const data = await res.json();
@@ -90,29 +88,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Top Header */}
-      <header className="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-2 bg-blue-600 text-white rounded-xl shadow-md shadow-blue-500/20">
-              <Languages className="w-5 h-5" />
-            </div>
-            <div>
-              <h1 className="font-bold text-lg leading-tight">LuminaTranslate</h1>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                Powered by LangGraph & NVIDIA NIM
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <AuthButtons />
-          </div>
-        </div>
-      </header>
-
+    <div className="flex-1 flex flex-col">
       {/* Main Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-4 md:p-8 flex flex-col gap-6">
         
@@ -141,6 +117,14 @@ export default function Home() {
                 </option>
               ))}
             </select>
+
+            <label
+              title="Fixes grammar and spelling before translating. Tip: choose the same language as your text to only correct it."
+              className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap cursor-pointer"
+            >
+              <input type="checkbox" checked={fixGrammar} onChange={(e) => setFixGrammar(e.target.checked)} className="accent-blue-600" />
+              Fix grammar
+            </label>
 
             <button
               onClick={handleTranslate}
@@ -220,12 +204,13 @@ export default function Home() {
                   <Wand2 className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" /> Grammar Corrected Input:
                 </p>
                 <p className="text-amber-800 dark:text-amber-300 font-mono">{result.correctedText}</p>
+                <button onClick={() => setText(result.correctedText!)} className="mt-2 text-amber-700 dark:text-amber-300 underline hover:no-underline">Use corrected text as source</button>
               </div>
             )}
           </div>
         </div>
 
-        <DocTranslator targetLanguage={targetLanguage} />
+        <DocTranslator targetLanguage={targetLanguage} fixGrammar={fixGrammar} />
 
         {/* History (signed-in users) */}
         {isSignedIn && (
